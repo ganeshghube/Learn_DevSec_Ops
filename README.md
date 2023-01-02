@@ -40,3 +40,21 @@ Answer: Git provides Performance / Security / Flexibility.
 --> Security :  The content of the files as well as the true relationships between files and directories, versions, tags and commits, all of these objects in the Git repository are secured with a cryptographically secure hashing algorithm called SHA1. This protects the code and the change history against both accidental and malicious change and ensures that the history is fully traceable.
 
 --> Flexibility : Git is flexible in several respects: in support for various kinds of nonlinear development workflows, in its efficiency in both small and large projects and in its compatibility with many existing systems and protocols.
+
+### 1.4 Installation of Git.
+
+Answer:  
+You probably have Git installed already — try typing at the command line and see if it returns a version number. If it says the command is not found, use your package manager to install it move to next step.
+```bash
+git --version
+```
+
+If you are using a RedHat style, distribution (RedHat, CentOS or Fedora),
+```bash
+sudo yum -y install git
+```
+or on the newer distributions
+```bash
+sudo dnf -y install git
+```
+
