@@ -58,3 +58,36 @@ or on the newer distributions
 sudo dnf -y install git
 ```
 
+### 1.4 Getting Started with Github.
+Answer : The first thing you need to do is create yourself a GitHub account. Since you are a student, you can create yourself a student account. GitHub is free to use providing you are happy to make all your repositories public. If you want private repositories you have to pay unless you are a student or an academic in which case you can have free private accounts.
+
+As explained in the Introduction, one of the main things you will want to do with GitHub is synchronize your local repository with it. GitHub requires you to log in with your username and password. This would be rather a nuisance if everytime you wanted to synchronize your local Git repository with GitHub you had to specify your username and password. Fortunately a mechanism is provided to allow you to avoid this.
+First you need to create yourself what is known as an SSH key
+```bash
+cd
+mkdir .ssh
+cd .ssh
+ssh-keygen
+```
+
+ssh-keygen will probably ask you where you want to save the key. Simply press the Return key to accept the default. 
+ssh-keygen will then ask you to enter a passphrase. Simply press the Return key so that no passphrase is generated. You will then have to press the Return key a second time to confirm your (empty) passphrase.
+Now if you type ls, you should find that you have two files called id_rsa (your private key) and id_rsa.pub (your public key). Display your public key:
+```bash
+cat id_rsa.pub
+```
+
+Copy and paste the whole of the public key that you displayed a moment ago (the content of id_rsa.pub) into the Key box. In GitHub, click the menu item at the top right (it may be a picture of you if you have added a profile picture) and choose Settings from the menu. Click Add SSH key at the bottom of this section of the web page.
+
+### 1.4 Configuring Git
+Answer : You need to type two lines to configure Git and link it to GitHub.
+
+In the following commands:
+
+• Replace USERNAME with the username that you created on GitHub
+
+• Replace EMAIL with your email address
+```bash
+git config --global user.name "USERNAME"
+git config --global user.email "EMAIL"
+```
