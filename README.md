@@ -19,8 +19,11 @@ This Repo created for those Beginners who are intrested to learn DevOps Engineer
 Answer: Version control, also known as source control, is the practice of tracking and managing changes to software code. 
 
 --> It helps developers to  manage changes to source code over time.
---> It helps 
+
+--> It helps software teams work faster and smarter on Developement.
+
 --> VCS keeps track of every modification to the code in a special kind of databasesoftware teams work faster and smarter.
+
 --> It helps to Organise distrubuted code in best manners.
 
 ### 1.2 What is git?
