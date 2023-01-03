@@ -204,13 +204,47 @@ git clean -n   #Would remove untracked_file
 
 git clean -f # The force option initiates the actual deletion of untracked files from the current directory. Force is required unless the clean.requireForce configuration option is set to false. This will not remove untracked folders or files specified by .gitignore. Let us now execute a live git clean in our example repo.
 
-
 git clean -f <path> #-d include directories The -d option tells git clean that you also want to remove any untracked directories, by default it will ignore directories. We can add the -d option to our previous examples.
 
 git clean -dn  # Would remove untracked_dir/
 
 git clean -df  #Removing untracked_dir/
+```
+
+The git revert command can be considered an 'undo' type command, however, it is not a traditional undo operation. Instead of removing the commit from the project history, it figures out how to invert the changes introduced by the commit and appends a new commit with the resulting inverse content. This prevents Git from losing history, which is important for the integrity of your revision history and for reliable collaboration.
+
+The git revert command is used for undoing changes to a repository's commit history. Other 'undo' commands like, git checkout and git reset, move the HEAD and branch ref pointers to a specified commit. Git revert also takes a specified commit, however, git revert does not move ref pointers to this commit. A revert operation will take the specified commit, inverse the changes from that commit, and create a new "revert commit". The ref pointers are then updated to point at the new revert commit making it the tip of the branch.
+```bash
+git revert HEAD  #[main b9cd081] Revert "prepend content to demo file" 1 file changed, 1 deletion(-)
+
+git revert b9cd081  # git revert <commit id>  it will revert upto the commit id.
+
+```
+
+Remove the specified file from the staging area, but leave the working directory unchanged. This unstages a file without overwriting any changes.
+```bash
+git reset ＜file＞
+```
+ 
+Reset the staging area to match the most recent commit, but leave the working directory unchanged. This unstages all files without overwriting any changes, giving you the opportunity to re-build the staged snapshot from scratch.
+```bash
+git reset
+```
+ 
+
+Reset the staging area and the working directory to match the most recent commit. In addition to unstaging changes, the --hard flag tells Git to overwrite all changes in the working directory, too. Put another way: this obliterates all uncommitted changes, so make sure you really want to throw away your local developments before using it.
+```
+git reset --hard
+```
+ 
+
+Move the current branch tip backward to commit, reset the staging area to match, but leave the working directory alone. All changes made since  will reside in the working directory, which lets you re-commit the project history using cleaner, more atomic snapshots.
+```
+git reset  
+```
 
 
-
+Move the current branch tip backward to   and reset both the staging area and the working directory to match. This obliterates not only the uncommitted changes, but all commits after, as well.
+```
+git reset --hard
 ```
