@@ -132,5 +132,7 @@ To verify a file which is added in working area check git status command
 git status
 ```
 
+See the screen capture here.
+
 
 
