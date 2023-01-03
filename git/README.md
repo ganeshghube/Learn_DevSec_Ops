@@ -372,3 +372,42 @@ Please follow the following steps to fix merge conflicts in Git:
 
 11: Push to the master branch: git push (to your Git repository)
 ```
+
+### 1.16  Update your local copy of the repository: 
+```
+git pull --prune
+```
+
+### 1.17  Git Revert: 
+revert	Generally safe since it creates a new commit.
+commit --amend	Only use on local commits.
+reset	Only use on local commits.
+cherry-pick	Only use on local commits.
+rebase	Only use on local commits.
+
+```
+git revert <SHA>  #Initialize the revert: 
+Type a commit message.
+Push your changes to GitHub.
+
+git show SHA.
+```
+
+### 1.18  Git Tags
+A tag is a pointer that points to a specific commit. Git tags are of two variants, an annotated tag and a lightweight tag. An annotated tag is an immutable object unlike a lightweight tag which is mutable. Let's practice a bit with tags.
+
+Tags can be created locally with Git, or on GitHub. When creating a tag from the command line, it's recommended to create an "annotated" tag. The following example creates an annotated tag with the -a flag, names the tag v1.0, and connects it to whichever commit SHA is included.
+
+Add a release to GitHub Games
+On GitHub, navigate to the Code tab of the repository.
+Under your repository name, click Releases.
+Click Draft a new release.
+Type a name for the tag. We recommend you use semantic versioning.
+Select a branch that contains the project you want to release. Usually, you'll want to release against your main branch, unless you're releasing beta software. You can also select a recent commit by choosing the recent commits tab.
+Type a title and description that describes your release.
+If you're ready to publicize your release, click Publish release. Otherwise, click Save draft to work on it later.
+
+```
+git tag -a v1.0 <SHA>
+git tag --list #To see all tags, type   
+```
