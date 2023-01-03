@@ -66,6 +66,12 @@ cat id_rsa.pub
 
 Copy and paste the whole of the public key that you displayed a moment ago (the content of id_rsa.pub) into the Key box. In GitHub, click the menu item at the top right (it may be a picture of you if you have added a profile picture) and choose Settings from the menu. Click Add SSH key at the bottom of this section of the web page.
 
+```
+ssh -T git@github.com
+git remote set-url origin git@github.com:ganeshghube/Learn_DevSec_Ops.git
+```
+Above command will help to authenticate ssh keys remote repo
+
 ### 1.4 Configuring Git
 Answer : You need to type two lines to configure Git and link it to GitHub.
 
