@@ -138,11 +138,9 @@ See the screen capture here.
 ![gitstatus logo](https://github.com/ganeshghube/Learn_DevSec_Ops/blob/main/git/images/gitstatus.JPG "git status")
 
 
-### 1.7 How to commit files and push to remote repository?
-
-[install@ip-172-31-72-211 Learn_DevSec_Ops]$ git commit -m 'added new file'
-[main 2907a5e] added new file
- 1 file changed, 1 insertion(+)
- create mode 100644 newfile.txt
-[install@ip-172-31-72-211 Learn_DevSec_Ops]$
+### 1.8 How to commit files and push to remote repository?
+Answer: To commit files use following commands.
+```bash
+git commit -m 'added new file'
+```
 
