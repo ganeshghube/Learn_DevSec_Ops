@@ -133,6 +133,7 @@ git status
 ```
 
 See the screen capture here.
+gitstatus.JPG
 
 
 
