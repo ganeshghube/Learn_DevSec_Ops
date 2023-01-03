@@ -150,6 +150,8 @@ Answer:  Git log is the command by using a log status of repo has been checked
 ```bash
 git log
 
+git log --since=2.weeks
+
 git log --oneline has been used to see logs status in single line.
 
 git log -n <limit>  #Limit the number of commits by
@@ -247,4 +249,30 @@ git reset
 Move the current branch tip backward to   and reset both the staging area and the working directory to match. This obliterates not only the uncommitted changes, but all commits after, as well.
 ```
 git reset --hard
+```
+
+
+To remove a file from Git, you have to remove it from your tracked files (moreaccurately, remove it from your staging area) and then commit. The git rm command does that, and also removes the file from your working directory so you don’t see it as an untracked file the next time around.
+If you simply remove the file from your working directory, it shows up under the “Changed but not updated” (that is, unstaged) area of your git status
+```
+rm PROJECTS.md
+git rm PROJECTS.md
+git rm log/\*.log
+ #You can pass files, directories, and file-glob patterns to the git rm command. That means you can do things such as:
+
+```
+
+
+### 1.12 Moving Files
+Unlike many other VCS systems, Git doesn’t explicitly track file movement. If you rename a file in Git, no metadata is stored in Git that tells it you renamed the file. However, Git is pretty smart about figuring that out the fact – we’ll deal with detecting file movement a bit later.
+Thus it’s a bit confusing that Git has a mv command. If you want to rename a file in Git, you can run something like:
+```
+git mv file_from file_to
+git mv README.md README
+git status
+
+mv README.md README
+git rm README.md
+git add README
+
 ```
