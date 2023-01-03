@@ -149,11 +149,8 @@ git push -u origin master #is used for pushing local content to GitHub.
 Answer:  Git log is the command by using a log status of repo has been checked
 ```bash
 git log
-```
 
 git log --oneline has been used to see logs status in single line.
-```bash
-git log --oneline
 
 git log -n <limit>  #Limit the number of commits by
 
