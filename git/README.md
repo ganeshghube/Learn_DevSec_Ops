@@ -133,6 +133,8 @@ git status
 ```
 
 See the screen capture here.
+
+
 ![gitstatus logo](https://github.com/ganeshghube/Learn_DevSec_Ops/blob/main/git/images/gitstatus.JPG "git status")
 
 
