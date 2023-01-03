@@ -432,7 +432,7 @@ A recursive merge means that changes have been made on both the base branch and 
 Octopus
 A merge of 3 or more branches is an octopus merge. This will also create a merge commit with multiple parents.
 
-### 1.19  Understanding Git rebase
+### 1.20  Understanding Git rebase
 
 git rebase enables you to modify your commit history in a variety of ways. For example, you can use it to reorder commits, edit them, squash multiple commits into one, and much more.
 
