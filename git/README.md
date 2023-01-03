@@ -127,10 +127,10 @@ git add .
 #git add newfile.txt   #just to add newfile provides file name if you need to add all file add .
 ```
 
-Create a new git repository for an existing code base
+To verify a file which is added in working area check git status command
 ```bash
-cd /path/to/code \ 
-git init \ 
-git add . \ 
-git commit
+git status
 ```
+
+
+
