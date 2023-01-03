@@ -193,3 +193,24 @@ $ git check-ignore -v debug.log
 .gitignore:3:*.log  debug.log
 
 ```
+
+
+### 1.11 How git clean | git revert | git reset | git rm  ?
+git clean is a convenience method for deleting untracked files in a repo's working directory. Untracked files are those that are in the repo's directory but have not yet been added to the repo's index with git add. Overall the effect of git clean can be accomplished using git status and the operating systems native deletion tools. Git clean can be used alongside git reset to fully undo any additions and commits in a repository.
+
+
+```bash
+git clean -n   #Would remove untracked_file
+
+git clean -f # The force option initiates the actual deletion of untracked files from the current directory. Force is required unless the clean.requireForce configuration option is set to false. This will not remove untracked folders or files specified by .gitignore. Let us now execute a live git clean in our example repo.
+
+
+git clean -f <path> #-d include directories The -d option tells git clean that you also want to remove any untracked directories, by default it will ignore directories. We can add the -d option to our previous examples.
+
+git clean -dn  # Would remove untracked_dir/
+
+git clean -df  #Removing untracked_dir/
+
+
+
+```
