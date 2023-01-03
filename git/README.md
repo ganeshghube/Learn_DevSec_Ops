@@ -142,5 +142,16 @@ See the screen capture here.
 Answer: To commit files use following commands.
 ```bash
 git commit -m 'added new file'
+git push -u origin master #is used for pushing local content to GitHub.
 ```
 
+### 1.9 How to see logs?
+Answer:  Git log is the command by using a log status of repo has been checked
+```bash
+git log
+```
+
+git log --oneline has been used to see logs status in single line.
+```bash
+git log --oneline
+```
