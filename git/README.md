@@ -163,6 +163,15 @@ git log -p   #Along with the ordinary git log information, include which files w
 git log --author="<pattern>"   #Display the patch representing each commit. This shows the full diff of each commit, which is the most detailed view you can have of your project history.
 
 git log --graph --decorate --oneline  #Only display commits that include the specified file. This is an easy way to see the history of a particular file.
+
+git log --oneline --graph --decorate
+
+git log --oneline --graph --decorate --all
+
+git log --stat
+
+git log --patch
+
 ```
 
 ### 1.10 How to ignore files to push and commit to the repo?
@@ -299,7 +308,7 @@ git checkout -d test
 
 To List all Branches
 ```
-git branch
+git branch -a
 ```
 
 
@@ -328,4 +337,38 @@ git branch -v
 git branch --merged  #To see all the branches that contain work you have merged in
 
 git branch --no-merged #To see all the branches that contain work you haven’t yet merged in
+```
+
+
+### 1.15 Basic Merge Conflicts
+When you work with a team (and even sometimes when you are working alone) you will occasionally create merge conflicts. At first, merge conflicts can be intimidating, but resolving them is actually quite easy. In this section you will learn how!
+These exercises will focus on the technical "how". In real merge conflicts, it's important to know who to ask in case you aren't sure how to resolve the conflict on your own. Usually it's a good idea to ask the person who made the conflicting changes, or someone who referenced in the CODEOWNERS file.
+
+Resolving a Merge Conflict (practice alone)
+If it's difficult to practice with a partner, you can do that by alone by following below.
+
+Please follow the following steps to fix merge conflicts in Git:
+
+```
+1: Check the Git status: git status
+
+2: Get the patchset: git fetch (checkout the right patch from your Git commit)
+
+3: Checkout a local branch (temp1 in my example here): git checkout -b temp1
+
+4: Pull the recent contents from master: git pull --rebase origin master
+
+5: Start the mergetool and check the conflicts and fix them...and check the changes in the remote branch with your current branch: git mergetool
+
+6: Check the status again: git status
+
+7: Delete the unwanted files locally created by mergetool, usually mergetool creates extra file with *.orig extension. Please delete that file as that is just the duplicate and fix changes locally and add the correct version of your files. git add #your_changed_correct_files
+
+8: Check the status again: git status
+
+9: Commit the changes to the same commit id (this avoids a new separate patch set): git commit --amend
+
+10: git rebase --continue
+
+11: Push to the master branch: git push (to your Git repository)
 ```
