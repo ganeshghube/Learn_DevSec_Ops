@@ -3,6 +3,6 @@ This Repo created for those Beginners who are intrested to learn DevOps Engineer
 
 | No  | Description | Reference |
 | ------------- | ------------- | ------------- |
-| 1  |  Git for Beginners  |  [Contribution guidelines for this project](git/Readme.md)  |
-| 2  |  Terraform  |   |  [Contribution guidelines for this project](terraform/Readme.md)  |
+| 1  |  Git for Beginners  |  [Contribution guidelines for this project](git/README.md)  |
+| 2  |  Terraform  |   |  [Contribution guidelines for this project](terraform/README.md)  |
 
