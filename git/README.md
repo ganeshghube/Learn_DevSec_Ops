@@ -466,4 +466,4 @@ Hotfix- also helps prepare for a release but unlike release branches, hotfix bra
 The main and develop branches are considered to be the main branches, with an infinite lifetime, while the rest are supporting branches that are meant to aid parallel development among developers, usually short-lived.
 
 
-![gitsflow logo](https://github.com/ganeshghube/Learn_DevSec_Ops/blob/main/git/images/gitflow.JPG "git status")
+![gitsflow logo](https://github.com/ganeshghube/Learn_DevSec_Ops/blob/main/git/images/gitflow.png "git status")
