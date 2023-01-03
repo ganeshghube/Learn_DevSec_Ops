@@ -127,7 +127,7 @@ git add .
 #git add newfile.txt   #just to add newfile provides file name if you need to add all file add .
 ```
 
-To verify a file which is added in working area check git status command
+To verify a file which is added in staging area check git status command
 ```bash
 git status
 ```
@@ -138,4 +138,11 @@ See the screen capture here.
 ![gitstatus logo](https://github.com/ganeshghube/Learn_DevSec_Ops/blob/main/git/images/gitstatus.JPG "git status")
 
 
+### 1.7 How to commit files and push to remote repository?
+
+[install@ip-172-31-72-211 Learn_DevSec_Ops]$ git commit -m 'added new file'
+[main 2907a5e] added new file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 newfile.txt
+[install@ip-172-31-72-211 Learn_DevSec_Ops]$
 
