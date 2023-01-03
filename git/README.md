@@ -301,3 +301,31 @@ To List all Branches
 ```
 git branch
 ```
+
+
+### 1.14 GIt Merging
+Suppose you’ve decided that your issue #test work is complete and ready to be merged into your master branch. In order to do that, you’ll merge your #test
+branch into master, much like you merged your hotfix branch earlier. All you have to do is check out the branch you wish to merge into and then run the git
+merge command:
+```
+git checkout master #Switched to branch 'master'
+
+git merge test #Merge made by the 'recursive' strategy.
+```
+
+### 1.15 Basic Merge Conflicts
+Occasionally, this process doesn’t go smoothly. If you changed the same part of the same file apperently in the two branches you’re merging together, Git won’t be able to merge them cleanly. If your fix for issue #test modified the same part of a file as the hotfix, you’ll get a merge conflict that looks something like this.
+
+```
+git merge test
+
+git status
+
+git mergetool
+
+git branch -v
+
+git branch --merged  #To see all the branches that contain work you have merged in
+
+git branch --no-merged #To see all the branches that contain work you haven’t yet merged in
+```
