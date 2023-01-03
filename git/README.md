@@ -399,15 +399,48 @@ A tag is a pointer that points to a specific commit. Git tags are of two variant
 Tags can be created locally with Git, or on GitHub. When creating a tag from the command line, it's recommended to create an "annotated" tag. The following example creates an annotated tag with the -a flag, names the tag v1.0, and connects it to whichever commit SHA is included.
 
 Add a release to GitHub Games
+
 On GitHub, navigate to the Code tab of the repository.
+
 Under your repository name, click Releases.
+
 Click Draft a new release.
+
 Type a name for the tag. We recommend you use semantic versioning.
+
 Select a branch that contains the project you want to release. Usually, you'll want to release against your main branch, unless you're releasing beta software. You can also select a recent commit by choosing the recent commits tab.
+
 Type a title and description that describes your release.
+
 If you're ready to publicize your release, click Publish release. Otherwise, click Save draft to work on it later.
 
 ```
 git tag -a v1.0 <SHA>
 git tag --list #To see all tags, type   
 ```
+
+
+### 1.19  Understanding Git merge strategies
+Git uses three primary merge strategies:
+
+Fast-forward
+A fast-forward merge assumes that no changes have been made on the base branch since the feature branch was created. This means that the branch pointer for base can simply be "fast forwarded" to point to the same commit as the feature branch.
+
+Recursive
+A recursive merge means that changes have been made on both the base branch and the feature branch and git needs to recursively combine them. With a recursive merge, a new "merge commit" is made to mark the point in time when the two branches came together. This merge commit is special because it has more than one parent.
+
+Octopus
+A merge of 3 or more branches is an octopus merge. This will also create a merge commit with multiple parents.
+
+### 1.19  Understanding Git rebase
+
+git rebase enables you to modify your commit history in a variety of ways. For example, you can use it to reorder commits, edit them, squash multiple commits into one, and much more.
+
+To enable all of this, rebase comes in several forms. For today's class, we'll be using interactive rebase: git rebase --interactive, or git rebase -i for short.
+
+Typically, you would use git rebase -i to:
+
+Replay one branch on top of another branch
+Edit previous commit messages
+Combine multiple commits into one
+Delete or revert commits that are no longer necessary
