@@ -86,7 +86,7 @@ mkdir test && cd test
 git init
 ````
 
-### 1.6 What is git clone? Iwhat is difference between git clone and git init?
+### 1.6 What is git clone? what is difference between git clone and git init?
 Answer: git clone is primarily used to point to an existing repo and make a clone or copy of that repo at in a new directory, at another location. The original repository can be located on the local filesystem or on remote machine accessible supported protocols. The git clone command copies an existing Git repository
 
 Cloning a local or remote repository : Cloning to a specific folder. Clone the repository located at ＜repo＞ into the folder called ~＜directory＞! on the local machine.
@@ -117,3 +117,20 @@ git clone --branch main https://github.com/ganeshghube/Learn_DevSec_Ops.git
 Difference between git clone and git init?
 
 A quick note: git init and git clone can be easily confused. At a high level, they can both be used to "initialize a new git repository." However, git clone is dependent on git init. git clone is used to create a copy of an existing repository. Internally, git clone first calls git init to create a new repository. It then copies the data from the existing repository, and checks out a new set of working files.
+
+### 1.7 How to add new files in existing git repo ?
+
+Add a new file in existing codebase in staging area.
+```bash
+touch newfile.txt; echo "Add a first line" >> newfile.txt
+git add .  
+#git add newfile.txt   #just to add newfile provides file name if you need to add all file add .
+```
+
+Create a new git repository for an existing code base
+```bash
+cd /path/to/code \ 
+git init \ 
+git add . \ 
+git commit
+```
