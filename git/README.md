@@ -257,8 +257,7 @@ If you simply remove the file from your working directory, it shows up under the
 ```
 rm PROJECTS.md
 git rm PROJECTS.md
-git rm log/\*.log
- #You can pass files, directories, and file-glob patterns to the git rm command. That means you can do things such as:
+git rm log/\*.log #You can pass files, directories, and file-glob patterns to the git rm command. 
 
 ```
 
@@ -275,4 +274,30 @@ mv README.md README
 git rm README.md
 git add README
 
+```
+
+### 1.13 GIt Branches
+Let’s say you create a new branch called testing. You do this with the git branch command.
+```
+git branch test
+```
+
+To switch to an existing branch, you run the git checkout command. Let’s switch to the new testing branch:
+```
+git checkout test
+```
+
+To create a new branch and swith into it
+```
+git checkout -b test
+```
+
+To Delete a Branch
+```
+git checkout -d test
+```
+
+To List all Branches
+```
+git branch
 ```
