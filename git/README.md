@@ -78,3 +78,41 @@ In the following commands:
 git config --global user.name "USERNAME"
 git config --global user.email "EMAIL"
 ```
+
+### 1.5 What is git repository ? Initilize a git repository into a foler
+Answer:  A Git repository is a virtual storage of your project. It allows you to save versions of your code, which you can access when needed. To create a new repo, you'll use the git init command. git init is a one-time command you use during the initial setup of a new repo. Executing this command will create a new .git subdirectory in your current working directory. This will also create a new main branch. 
+```bash
+mkdir test && cd test
+git init
+````
+
+### 1.6 What is git clone? Iwhat is difference between git clone and git init?
+Answer: git clone is primarily used to point to an existing repo and make a clone or copy of that repo at in a new directory, at another location. The original repository can be located on the local filesystem or on remote machine accessible supported protocols. The git clone command copies an existing Git repository
+
+Cloning a local or remote repository : Cloning to a specific folder. Clone the repository located at ＜repo＞ into the folder called ~＜directory＞! on the local machine.
+```bash
+git clone <repo> <directory>
+git clone https://github.com/ganeshghube/Learn_DevSec_Ops.git  test
+```
+
+Cloning with specific tag
+```bash
+git clone --branch <tag> <repo>
+git clone --branch main https://github.com/ganeshghube/Learn_DevSec_Ops.git
+```
+
+Using shallow options to partially clone repositories
+```bash
+git clone -depth=1 <repo>
+git clone --depth=1 https://github.com/ganeshghube/Learn_DevSec_Ops.git
+```
+
+
+Git clone Branch, The -branch argument lets you specify a specific branch to clone instead of the branch the remote HEAD is pointing to, usually the main branch. In addition you can pass a tag instead of branch for the same effect.
+```bash
+git clone --branch
+git clone --branch main https://github.com/ganeshghube/Learn_DevSec_Ops.git
+```
+
+Difference between git clone and git init?
+A quick note: git init and git clone can be easily confused. At a high level, they can both be used to "initialize a new git repository." However, git clone is dependent on git init. git clone is used to create a copy of an existing repository. Internally, git clone first calls git init to create a new repository. It then copies the data from the existing repository, and checks out a new set of working files.
