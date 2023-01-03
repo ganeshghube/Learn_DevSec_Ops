@@ -154,4 +154,45 @@ git log
 git log --oneline has been used to see logs status in single line.
 ```bash
 git log --oneline
+
+git log -n <limit>  #Limit the number of commits by
+
+git log --stat  #Condense each commit to a single line. This is useful for getting a high-level overview of the project history.
+
+git log -p   #Along with the ordinary git log information, include which files were altered and the relative number of lines that were added or deleted from each of them.
+
+git log --author="<pattern>"   #Display the patch representing each commit. This shows the full diff of each commit, which is the most detailed view you can have of your project history.
+
+git log --graph --decorate --oneline  #Only display commits that include the specified file. This is an easy way to see the history of a particular file.
+```
+
+### 1.10 How to ignore files to push and commit to the repo?
+Answer: 
+tracked - a file which has been previously staged or committed;
+
+untracked - a file which has not been staged or committed; or
+
+ignored - a file which Git has been explicitly told to ignore.
+
+In addition to these characters, you can use # to include comments in your .gitignore file:
+
+```bash
+# ignore all logs
+*.log
+
+# ignore the file literally named foo[01].txt
+foo\[01\].txt
+
+#Ignoring a previously committed file
+$ echo debug.log >> .gitignore
+  
+$ git rm --cached debug.log
+rm 'debug.log'
+  
+$ git commit -m "Start ignoring debug.log"
+
+#Debugging .gitignore files
+$ git check-ignore -v debug.log
+.gitignore:3:*.log  debug.log
+
 ```
