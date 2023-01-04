@@ -316,6 +316,16 @@ To List all Branches
 ```
 git branch -a
 ```
+To Rename Branches
+```
+git branch -m new_temp  
+git branch -m new_temp temp #Rename the branch
+git push origin :temp main #push temp branch to main branch
+git push -delete origin
+temp
+git branch -d temp
+```
+
 
 
 ### 1.14 GIt Merging
