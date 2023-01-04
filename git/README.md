@@ -408,6 +408,7 @@ git add .
 git commit -m "feature branch"
 git checkout main
 git merge feature --> merge feature branch into main will get cnflict error
+git merge feature masin --> single command for merge where source and destination branch given.
 git config --global merge.tool vimdiff
 git mergetool
 ------------------------------------------
@@ -499,6 +500,10 @@ Replay one branch on top of another branch
 Edit previous commit messages
 Combine multiple commits into one
 Delete or revert commits that are no longer necessary
+```
+git checkout feature
+git rebase -i main
+```
 
 ### 1.21  GitFlow
 Considered to be a bit complicated and advanced for many of today’s projects, GitFlow enables parallel development where developers can work separately from the master branch on features where a feature branch is created from the master branch.
