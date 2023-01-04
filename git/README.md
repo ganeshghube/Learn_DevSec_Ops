@@ -425,6 +425,7 @@ git mergetool
 As mentioned above table in merge section you will see all code merged. You need to choose your code and cirrect the code.
 so use insert button and update merge file to save :wq! and then updae and save rest all 3 branches files. 
 
+git reset #can be used during a merge conflict to reset conflicted files to a know good state
 ```
 
 ### 1.16  Update your local copy of the repository: 
