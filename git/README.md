@@ -310,6 +310,7 @@ git checkout -b test
 To Delete a Branch
 ```
 git checkout -d test
+git push -d <remote name> <branch name #to delete remote branch
 ```
 
 To List all Branches
@@ -324,6 +325,7 @@ git push origin :temp main #push temp branch to main branch
 git push -delete origin
 temp
 git branch -d temp
+git push -f origin temp #forcefully push to remote
 ```
 
 
@@ -387,6 +389,42 @@ Please follow the following steps to fix merge conflicts in Git:
 10: git rebase --continue
 
 11: Push to the master branch: git push (to your Git repository)
+
+##################################
+To test on local
+#################################
+git branch main
+vi test.txt --> Main branch
+git add .
+git commit -m "Main branch commit1"
+git branch
+vi test.txt --> Another commit from main
+git add .
+git commit -m "Another commit"
+git branch feature
+git checkout feature
+vi test.txt --> feature branch
+git add .
+git commit -m "feature branch"
+git checkout main
+git merge feature --> merge feature branch into main will get cnflict error
+git config --global merge.tool vimdiff
+git mergetool
+------------------------------------------
+| <TAB #1> |  TAB #2  |  TAB #3  |       |
+------------------------------------------
+|             |           |              |
+|   LOCAL     |   BASE    |   REMOTE     |
+|             |           |              |
+------------------------------------------
+|                                        |
+|                MERGED                  |
+|                                        |
+------------------------------------------
+
+As mentioned above table in merge section you will see all code merged. You need to choose your code and cirrect the code.
+so use insert button and update merge file to save :wq! and then updae and save rest all 3 branches files. 
+
 ```
 
 ### 1.16  Update your local copy of the repository: 
