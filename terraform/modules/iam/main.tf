@@ -63,16 +63,49 @@ resource "aws_iam_policy" "policy" {
 EOF
 }
 
+resource "aws_iam_policy" "s3" {
+  name        = "${var.environment}-s3"
+  description = "${var.environment}-s3policy"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "s3:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+
+
 resource "aws_iam_role_policy_attachment" "test-attach" {
   role       = aws_iam_role.role.name
   policy_arn = aws_iam_policy.policy.arn
-}
+  }
 
 resource "aws_iam_group_policy_attachment" "custom_policy" {
   group      = aws_iam_group.dev_group.name
   policy_arn = aws_iam_policy.policy.arn
-}
+ }
 
+
+
+resource "aws_iam_role_policy_attachment" "s3" {
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.s3.arn
+  }
+
+resource "aws_iam_group_policy_attachment" "s3role" {
+  group      = aws_iam_group.dev_group.name
+  policy_arn = aws_iam_policy.s3.arn
+ }
 
 resource "aws_iam_group_membership" "team" {
   group = aws_iam_group.dev_group.name
