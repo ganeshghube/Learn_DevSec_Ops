@@ -4,8 +4,12 @@ resource "aws_iam_user" "user" {
 }
 
 resource "aws_iam_access_key" "newemp" {
-  count = length(var.user_names)
-  user = element(var.user_names,count.index)
+  count = "${length(var.user_names)}"
+  user = "${element(var.user_names,count.index)}"
+}
+
+resource "aws_iam_group" "dev_group" {
+  name = "${var.environment}-group"
 }
 
  resource "aws_iam_account_password_policy" "strict" {
@@ -18,11 +22,32 @@ resource "aws_iam_access_key" "newemp" {
 }
 
 
-resource "aws_iam_user_policy" "newemp_policy" {
-  count = length(var.user_names)
-  name = "${var.environment}-ec2"
-  user = element(var.user_names,count.index)
-policy = <<EOF
+resource "aws_iam_role" "role" {
+  name = "${var.environment}-role"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+
+resource "aws_iam_policy" "policy" {
+  name        = "${var.environment}-ec2"
+  description = "${var.environment}-policy"
+
+  policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -36,4 +61,21 @@ policy = <<EOF
   ]
 }
 EOF
+}
+
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.policy.arn
+}
+
+resource "aws_iam_group_policy_attachment" "custom_policy" {
+  group      = aws_iam_group.dev_group.name
+  policy_arn = aws_iam_policy.policy.arn
+}
+
+
+resource "aws_iam_group_membership" "team" {
+  group = aws_iam_group.dev_group.name
+  users = var.user_names
+  name = "tf-testing-group-membership"
 }
