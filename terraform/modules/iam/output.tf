@@ -1,5 +1,3 @@
-output "aws_iam_user" {
-  value = "${aws_iam_user.user}"
+output "user_arn" {
+value = "${aws_iam_user.user.0.arn}"
 }
-
-
