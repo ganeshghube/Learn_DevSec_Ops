@@ -1,7 +1,7 @@
 
 
   module "vpc" {
-  source = "./modules/vpc"
+  source = "../modules/vpc"
 
   project              = var.project
   environment          = var.environment
@@ -14,9 +14,8 @@
 
 
   module "iam" {
-  source = "./modules/iam"
+  source = "../modules/iam"
 
   user_names              = var.user_names
   environment             = var.environment
-  
   }
