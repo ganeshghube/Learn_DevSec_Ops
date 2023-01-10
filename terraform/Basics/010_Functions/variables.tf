@@ -1,7 +1,7 @@
 
 variable users {
     type = list
-    default = ["ganesh","dinesh","yogesh"]
+    default = ["ganesh","dinesh","yogesh","foobar"]
 }
 
 // NUMBER VARIABLE
