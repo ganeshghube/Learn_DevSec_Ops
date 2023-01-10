@@ -83,3 +83,12 @@ output print_sort {
 		value = "${sort(var.users)}"
 }
 
+
+#output print_filepath {
+#       		value = "${ file("${path.module}/main.tf")}"
+#}
+
+
+output print_date {
+   value = "${ formatdate("HH:mmaa", "2018-01-02T23:12:01Z")}"
+}
