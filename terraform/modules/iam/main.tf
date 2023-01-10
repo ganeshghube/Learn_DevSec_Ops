@@ -43,7 +43,7 @@ EOF
 }
 
 
-resource "aws_iam_policy" "policy" {
+resource "aws_iam_policy" "ec2policy" {
   name        = "${var.environment}-ec2"
   description = "${var.environment}-policy"
 
@@ -63,7 +63,7 @@ resource "aws_iam_policy" "policy" {
 EOF
 }
 
-resource "aws_iam_policy" "s3" {
+resource "aws_iam_policy" "s3policy" {
   name        = "${var.environment}-s3"
   description = "${var.environment}-s3policy"
 
@@ -85,30 +85,30 @@ EOF
 
 
 
-resource "aws_iam_role_policy_attachment" "test-attach" {
-  role       = aws_iam_role.role.name
-  policy_arn = aws_iam_policy.policy.arn
-  }
+resource "aws_iam_group_membership" "team" {
+group = "${aws_iam_group.dev_group.name}"
+users = "${var.user_names}"
+name = "dev-group-membership"
+}
 
-resource "aws_iam_group_policy_attachment" "custom_policy" {
-  group      = aws_iam_group.dev_group.name
-  policy_arn = aws_iam_policy.policy.arn
- }
+resource "aws_iam_role_policy_attachment" "mgd_pol_1" {
+  role       = "${aws_iam_role.role.name}"
+  policy_arn = "${aws_iam_policy.s3policy.arn}"
+}
+
+resource "aws_iam_role_policy_attachment" "mgd_pol_2" {
+  role       = "${aws_iam_role.role.name}"
+  policy_arn = "${aws_iam_policy.ec2policy.arn}"
+}
 
 
-
-resource "aws_iam_role_policy_attachment" "s3" {
-  role       = aws_iam_role.role.name
-  policy_arn = aws_iam_policy.s3.arn
-  }
+resource "aws_iam_group_policy_attachment" "ec2" {
+group      = "${aws_iam_group.dev_group.name}"
+policy_arn = "${aws_iam_policy.ec2policy.arn}"
+}
 
 resource "aws_iam_group_policy_attachment" "s3role" {
-  group      = aws_iam_group.dev_group.name
-  policy_arn = aws_iam_policy.s3.arn
- }
-
-resource "aws_iam_group_membership" "team" {
-  group = aws_iam_group.dev_group.name
-  users = var.user_names
-  name = "tf-testing-group-membership"
+group      = "${aws_iam_group.dev_group.name}"
+policy_arn = "${aws_iam_policy.s3policy.arn}"
 }
+

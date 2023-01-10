@@ -35,3 +35,4 @@ variable "user_names" {
   type        = list(string)
   #default     = ["bogo_user_1", "bogo_user_2", "bogo_user_3"]
 }
+
