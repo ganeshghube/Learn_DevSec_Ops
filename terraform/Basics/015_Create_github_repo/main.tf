@@ -1,6 +1,6 @@
-provider "github" {
-  token="xxxxxxxxxxxxxxxxxxxx"
-}
+# provider "github" {
+#   token="xxxxxxxxxxxxxxxxxxxx"
+# }
 
 resource "github_repository" "terraform-first-repo" {
   name       = "first-repo-from-terraform"
