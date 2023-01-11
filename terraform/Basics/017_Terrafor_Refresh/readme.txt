@@ -10,3 +10,4 @@ By default, refresh requires no flags and looks in the current directory for the
 now let's run terraform refresh command in the folder that we created in last videos.
 
 terraform refresh
+
