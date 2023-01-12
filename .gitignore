@@ -1,5 +1,6 @@
 # Ignore providers
 provider.tf
+terraform.tfvars
 
 # Local .terraform directories
 **/.terraform/*
