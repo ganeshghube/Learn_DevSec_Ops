@@ -1,5 +1,5 @@
-access_key    = "xxxxxxxxxxxxxxx"
-secret_key    = "xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+access_key    = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+secret_key    = "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 region        = "us-east-1"
 instance_type = "t2.micro"
 image_id      = "ami-0417f301ebe0c8411"
