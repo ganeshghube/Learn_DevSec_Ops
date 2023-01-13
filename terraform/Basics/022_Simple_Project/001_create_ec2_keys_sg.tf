@@ -34,7 +34,7 @@ resource "aws_security_group" "allow_tls" {
   vpc_id      =  "${var.vpc_id}"
 
   dynamic "ingress" {
-    for_each = toset( ["80", "443", "22"] )
+    for_each =  ["80", "443", "22"] 
      content {
     description      = "TLS from VPC"
     from_port        = ingress.value
