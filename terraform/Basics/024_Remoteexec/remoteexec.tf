@@ -17,7 +17,7 @@ resource "aws_instance" "web" {
   provisioner "remote-exec" {
     inline = [
       "ifconfig > /tmp/ifconfig.output",
-      "echo 'hello gaurav'>/tmp/test.txt"
+      "echo 'hello ganesh'>/tmp/test.txt"
     ]
   }
   provisioner "remote-exec" {
