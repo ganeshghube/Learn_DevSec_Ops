@@ -24,3 +24,5 @@ resource "aws_instance" "web" {
     script = "./testscript.sh"
   }
 }
+
+#tested this is fine
