@@ -14,3 +14,4 @@ terraform.tfvars
 id_rsa
 id_rsa.pub
 authorized_keys
+provider.tf
