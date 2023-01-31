@@ -11,13 +11,19 @@ variable "cidr_block" {
 }
 
 variable "public_cidr" {
-  #type = string
+  type = list(any)
 }
 
 variable "private_cidr" {
-  #type = string
+  type = list(any)
 }
 
 variable "region" {
   #type = string
 }
+
+variable "availability_zones" {
+  type        = list(any)
+  description = "The names of the availability zones to use"
+}
+

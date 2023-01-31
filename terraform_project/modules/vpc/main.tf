@@ -10,13 +10,18 @@ resource "aws_vpc" "vpc" {
   }
 }
 
+
+
 ### Create subnet Public subnet
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = "${var.public_cidr}"
+  count      = length(var.public_cidr)
+  cidr_block = element(var.public_cidr, count.index)
+  availability_zone       = element(var.availability_zones, count.index)
+  map_public_ip_on_launch = true
   
     tags = {
-    Name  =  "${var.project_name}-public-subnet"
+    Name   = "${var.project_name}-${element(var.availability_zones, count.index)}-public-subnet"
     Env   =  "${var.project_env}"
   }
 }
@@ -48,24 +53,31 @@ resource "aws_route_table" "public" {
 
 #Associate Route Table public
 resource "aws_route_table_association" "a" {
-  subnet_id      = aws_subnet.public.id
+  count          = length(var.public_cidr)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.public.id
 }
+
+####################################################################
 
 #### Create subnet Private subnet
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = "${var.private_cidr}"
-  
+  count      = length(var.private_cidr)
+  cidr_block = element(var.private_cidr, count.index)
+  availability_zone       = element(var.availability_zones, count.index)
+  map_public_ip_on_launch = false
+   
     tags = {
-    Name  =  "${var.project_name}-private-subnet"
+    Name   = "${var.project_name}-${element(var.availability_zones, count.index)}-private-subnet"
     Env   =  "${var.project_env}"
   }
 }
 
 # Create aws ip
 resource "aws_eip" "ip" {
-  vpc      = true
+  vpc           = true
+  depends_on    = [aws_internet_gateway.gw]
   tags = {
     Name  =  "${var.project_name}-private-ip"
     Env   =  "${var.project_env}"
@@ -76,12 +88,13 @@ resource "aws_eip" "ip" {
 # Create Nat gateway
 resource "aws_nat_gateway" "nat" {
   connectivity_type = "private"
-  #allocation_id     = aws_eip.ip.id
-  subnet_id         = aws_subnet.private.id
-      tags = {
-    Name  =  "${var.project_name}-nat-private"
+  allocation_id     = aws_eip.ip.id
+  subnet_id         = element(aws_subnet.private.*.id, 0)
+  depends_on        = [aws_internet_gateway.gw]
+    
+    tags = {
+          Name  =  "${var.project_name}-nat-private"
   }
-  depends_on  = [aws_eip.ip]
 }
 
 
@@ -99,8 +112,15 @@ resource "aws_route_table" "private" {
   }
 }
 
+# #Allocate eip with nat gateway
+# resource "aws_eip_association" "example" {
+#   allocation_id = aws_eip.ip.id
+  
+# }
+
 #Associate Route Table private
 resource "aws_route_table_association" "b" {
-  subnet_id      = aws_subnet.private.id
+  count          = length(var.private_cidr)
+  subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = aws_route_table.private.id
 }
