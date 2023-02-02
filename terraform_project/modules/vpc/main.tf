@@ -1,126 +1,154 @@
-###  Create VPC with tag name Projectx
+/*====
+The VPC
+======*/
+
 resource "aws_vpc" "vpc" {
-  enable_dns_support = true
+  cidr_block           = "${var.vpc_cidr}"
   enable_dns_hostnames = true
-  cidr_block = "${var.cidr_block}"
+  enable_dns_support   = true
 
   tags = {
-    Name  =  "${var.project_name}"
-    Env   =  "${var.project_env}"
+    Name        = "${var.environment}-vpc"
+    Environment = "${var.environment}"
   }
 }
 
+/*====
+Public  Subnets
+======*/
 
-
-### Create subnet Public subnet
-resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.vpc.id
-  count      = length(var.public_cidr)
-  cidr_block = element(var.public_cidr, count.index)
-  availability_zone       = element(var.availability_zones, count.index)
+/* Public subnet */
+resource "aws_subnet" "public_subnet" {
+  vpc_id                  = "${aws_vpc.vpc.id}"
+  count                   = "${length(var.public_subnets_cidr)}"
+  cidr_block              = "${element(var.public_subnets_cidr, count.index)}"
+  availability_zone       = "${element(var.availability_zones, count.index)}"
   map_public_ip_on_launch = true
-  
-    tags = {
-    Name   = "${var.project_name}-${element(var.availability_zones, count.index)}-public-subnet"
-    Env   =  "${var.project_env}"
-  }
-}
-
-####Crate Internet Gateway
-resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name  =  "${var.project_name}-public"
-    Env   =  "${var.project_env}"
+    Name        = "${var.environment}-${element(var.availability_zones, count.index)}-public-subnet"
+    Environment = "${var.environment}"
   }
 }
 
-# Create Route table public
+/* Internet gateway for the public subnet */
+resource "aws_internet_gateway" "ig" {
+  vpc_id = "${aws_vpc.vpc.id}"
+
+  tags = {
+    Name        = "${var.environment}-igw"
+    Environment = "${var.environment}"
+  }
+}
+
+/* Routing table for public subnet */
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.vpc.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.gw.id
-    }
+  vpc_id = "${aws_vpc.vpc.id}"
 
   tags = {
-    Name  =  "${var.project_name}-public"
-    Env   =  "${var.project_env}"
+    Name        = "${var.environment}-public-route-table"
+    Environment = "${var.environment}"
   }
 }
 
-#Associate Route Table public
-resource "aws_route_table_association" "a" {
-  count          = length(var.public_cidr)
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
-  route_table_id = aws_route_table.public.id
+resource "aws_route" "public_internet_gateway" {
+  route_table_id         = "${aws_route_table.public.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "${aws_internet_gateway.ig.id}"
 }
 
-####################################################################
+/* Route table associations */
+resource "aws_route_table_association" "public" {
+  count          = "${length(var.public_subnets_cidr)}"
+  subnet_id      = "${element(aws_subnet.public_subnet.*.id, count.index)}"
+  route_table_id = "${aws_route_table.public.id}"
+}
 
-#### Create subnet Private subnet
-resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.vpc.id
-  count      = length(var.private_cidr)
-  cidr_block = element(var.private_cidr, count.index)
-  availability_zone       = element(var.availability_zones, count.index)
+/*====
+Private  Subnets
+======*/
+
+/* Private subnet */
+resource "aws_subnet" "private_subnet" {
+  vpc_id                  = "${aws_vpc.vpc.id}"
+  count                   = "${length(var.private_subnets_cidr)}"
+  cidr_block              = "${element(var.private_subnets_cidr, count.index)}"
+  availability_zone       = "${element(var.availability_zones, count.index)}"
   map_public_ip_on_launch = false
-   
-    tags = {
-    Name   = "${var.project_name}-${element(var.availability_zones, count.index)}-private-subnet"
-    Env   =  "${var.project_env}"
-  }
-}
 
-# Create aws ip
-resource "aws_eip" "ip" {
-  vpc           = true
-  depends_on    = [aws_internet_gateway.gw]
   tags = {
-    Name  =  "${var.project_name}-private-ip"
-    Env   =  "${var.project_env}"
+    Name        = "${var.environment}-${element(var.availability_zones, count.index)}-private-subnet"
+    Environment = "${var.environment}"
   }
 }
 
 
-# Create Nat gateway
+/* Elastic IP for NAT */
+resource "aws_eip" "nat_eip" {
+  vpc        = true
+  depends_on = [aws_internet_gateway.ig]
+}
+
+/* NAT */
 resource "aws_nat_gateway" "nat" {
-  connectivity_type = "private"
-  allocation_id     = aws_eip.ip.id
-  subnet_id         = element(aws_subnet.private.*.id, 0)
-  depends_on        = [aws_internet_gateway.gw]
-    
-    tags = {
-          Name  =  "${var.project_name}-nat-private"
-  }
-}
+  #connectivity_type = "private"
+  allocation_id = "${aws_eip.nat_eip.id}"
+  subnet_id     = "${element(aws_subnet.private_subnet.*.id, 0)}"
+  depends_on    = [aws_internet_gateway.ig]
 
-
-# Create Route table private
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.vpc.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat.id
-  }
   tags = {
-    Name  =  "${var.project_name}-private"
-    Env   =  "${var.project_env}"
+    Name        = "nat"
+    Environment = "${var.environment}"
   }
 }
 
-# #Allocate eip with nat gateway
-# resource "aws_eip_association" "example" {
-#   allocation_id = aws_eip.ip.id
-  
-# }
+/* Routing table for private subnet */
+resource "aws_route_table" "private" {
+  vpc_id = "${aws_vpc.vpc.id}"
 
-#Associate Route Table private
-resource "aws_route_table_association" "b" {
-  count          = length(var.private_cidr)
-  subnet_id      = element(aws_subnet.private.*.id, count.index)
-  route_table_id = aws_route_table.private.id
+  tags = {
+    Name        = "${var.environment}-private-route-table"
+    Environment = "${var.environment}"
+  }
+}
+
+resource "aws_route" "private_nat_gateway" {
+  route_table_id         = "${aws_route_table.private.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = "${aws_nat_gateway.nat.id}"
+}
+
+resource "aws_route_table_association" "private" {
+  count          = "${length(var.private_subnets_cidr)}"
+  subnet_id      = "${element(aws_subnet.private_subnet.*.id, count.index)}"
+  route_table_id = "${aws_route_table.private.id}"
+}
+
+/*====
+VPC's Default Security Group
+======*/
+resource "aws_security_group" "default" {
+  name        = "${var.environment}-default-sg"
+  description = "Default security group to allow inbound/outbound from the VPC"
+  vpc_id      = "${aws_vpc.vpc.id}"
+  depends_on  = [aws_vpc.vpc]
+
+  ingress {
+    from_port = "22"
+    to_port   = "22"
+    protocol  = "TCP"
+    self      = false
+    cidr_blocks = [ "0.0.0.0/0" ]
+  }
+
+  egress {
+    from_port = "0"
+    to_port   = "0"
+    protocol  = "-1"
+    self      = "true"
+  }
+
+  tags = {
+    Environment = "${var.environment}"
+  }
 }

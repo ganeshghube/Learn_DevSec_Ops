@@ -1,28 +1,33 @@
-variable "project_name" {
-  type = string
+variable "project" {
+  description = "The name of the project"
 }
 
-variable "project_env" {
-  type = string
-}
-
-variable "cidr_block" {
-  #type = string
-}
-
-variable "public_cidr" {
-  type = list(any)
-}
-
-variable "private_cidr" {
-  type = list(any)
+variable "environment" {
+  description = "The deployment environment"
+  default     = "production"
 }
 
 variable "region" {
-  #type = string
+  description = "The AWS Region"
 }
 
 variable "availability_zones" {
   type        = list(any)
   description = "The names of the availability zones to use"
 }
+
+variable "vpc_cidr" {
+  description = "The CIDR block of the vpc"
+}
+
+variable "public_subnets_cidr" {
+  type        = list(any)
+  description = "The CIDR block for the public subnet"
+}
+
+variable "private_subnets_cidr" {
+  type        = list(any)
+  description = "The CIDR block for the private subnet"
+}
+
+
