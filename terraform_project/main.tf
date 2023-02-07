@@ -10,12 +10,6 @@
   private_subnets_cidr = "${var.private_subnets_cidr}"
 }
 
-
-#   module "ec2" {
-#   source        = "./modules/ec2"
-  
-# }
-
 module "ec2" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
