@@ -10,3 +10,5 @@ print ("Your lastname is:" + lastname)
 print ("your full name is:" + firstname + " " + lastname)
 print ("Length of your full name is :")
 print (len(firstname + lastname))
+
+
