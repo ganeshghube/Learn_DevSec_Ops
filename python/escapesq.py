@@ -6,9 +6,9 @@ print("Line  A  \\tLine B")
 print("\"\'")
 
 
-
-
-
-
+print ("This is \\\\ double back sash")
+print ("There are /\\/\\/\\/\\ mountains")
+print ("He is \t awesome")
+print('\\\" \\n \\t \\\'')
 
 
