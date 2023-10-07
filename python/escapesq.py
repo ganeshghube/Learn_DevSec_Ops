@@ -7,7 +7,9 @@ print("\"\'")
 
 ######################################################
 print ("This is \\\\ double back sash")
-print ("There are /\\/\\/\\/\\ mountains")
+nt (p
+    
+"There are /\\/\\/\\/\\ mountains")
 print ("He is \t awesome")
 print('\\\" \\n \\t \\\'')
 print (r"Line A \nLine B")
@@ -17,7 +19,8 @@ print("\U0001F40D")
 print("\U0001F46B")
 ######################################################
 print("this  is \\\\double back sash")
-
+print("he is \t  awesome")   
+print("\\\" \\n \\t \\\")     
 
 
 
