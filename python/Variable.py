@@ -1,14 +1,44 @@
-name = "Ganesh"
-print (name)
-name = "Pooja"
-print (name)
+first_name = "Ganesh"
+last_name = "Ghube"
+print (first_name)
+print (last_name)
+full_name = first_name +" "+ last_name + " "
+print (full_name)
+print(full_name * 3 + "3")
+print(full_name * 3 + str(3))
 
-firstname = input("Enter your firstname\n")
-print ("Your firstname is:" + firstname)
-lastname = input("Enter your lastname\n")
-print ("Your lastname is:" + lastname)
-print ("your full name is:" + firstname + " " + lastname)
-print ("Length of your full name is :")
-print (len(firstname + lastname))
+#########################################
+first_name="Aaravi"
+last_name="Ghube"
+
+print(first_name)
+print(last_name)
+
+full_name=first_name+last_name
+print(full_name)
+
+print(full_name * 3 + "3")
+print(full_name * 3 + str(3))
+
+######################################################
+first_name="Anay"
+last_name="Ghube"
+
+print(first_name)
+print(last_name)
+
+full_name=first_name+ " " +last_name
+print(full_name)
+
+print(full_name * 3 + "3")
+print(full_name * 3 + str(3))
+
+
+
+
+
+
+
+
 
 
