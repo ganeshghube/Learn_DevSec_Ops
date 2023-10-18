@@ -21,4 +21,4 @@ print("The average is : ")
 print (int((Number_1 + Number_2 + Number_3 )/ 3))
 
 
-test
+test1
