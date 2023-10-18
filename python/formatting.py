@@ -17,23 +17,8 @@ print(f"hello {name} your age is {age}")
 Number_1 = int(input("Enter first number "))
 Number_2 = int(input("Enter second number "))
 Number_3 = int(input("Enter third number "))
-print("The average is ")
-print(Number_1 + Number_2 + Number_3 // 3)
+print("The average is : ")
+print (int((Number_1 + Number_2 + Number_3 )/ 3))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+test
