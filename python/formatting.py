@@ -19,6 +19,3 @@ Number_2 = int(input("Enter second number "))
 Number_3 = int(input("Enter third number "))
 print("The average is : ")
 print (int((Number_1 + Number_2 + Number_3 )/ 3))
-
-
-test1
